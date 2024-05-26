@@ -1,9 +1,7 @@
-import 'package:digigram/models/post_model.dart';
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/screens/view_image.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:digigram/widgets/post_view.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';

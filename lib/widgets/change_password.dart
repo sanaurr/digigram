@@ -19,7 +19,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               labelText: "Enter old password",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           const TextField(
@@ -27,7 +27,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               labelText: "Enter new password",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           const TextField(
@@ -35,7 +35,7 @@ class _ChangePasswordState extends State<ChangePassword> {
               labelText: "Re-enter new password",
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           ElevatedButton(

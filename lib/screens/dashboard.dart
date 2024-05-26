@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/utils/extentions.dart';
@@ -11,7 +10,6 @@ import 'package:go_router/go_router.dart';
 import 'package:loading_provider/loading_provider.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/post_view.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -43,7 +41,7 @@ class _DashboardState extends State<Dashboard> {
                   onPressed: () async {
                     context.loadingController.on();
                     await Future.delayed(
-                      Duration(seconds: 3),
+                      const Duration(seconds: 3),
                     );
                     context.loadingController.off();
                   },
@@ -57,7 +55,7 @@ class _DashboardState extends State<Dashboard> {
                     dimension: 30,
                     child: CircleAvatar(
                       backgroundImage:
-                          NetworkImage(context.watch<UserModel>().photoURL),
+                          NetworkImage(usermodel.photoURL),
                     ),
                   ),
                 ),
