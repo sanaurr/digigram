@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 void main(List<String> args) {
   print(splitstring("(quantity=3,total=30)"));

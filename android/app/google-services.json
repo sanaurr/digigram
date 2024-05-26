@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "541831301909",
+    "project_id": "digigram-e5cbf",
+    "storage_bucket": "digigram-e5cbf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:541831301909:android:06afcb46d5df90094bb71c",
+        "android_client_info": {
+          "package_name": "com.sanaur.digigram"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrO_uCLYTwh3qQaD6J4D2L9W1WpjQP-UQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

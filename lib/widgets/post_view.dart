@@ -142,7 +142,7 @@ class _PostViewState extends State<PostView> {
               if (showReactbar)
                 Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(25),
                     boxShadow: const [
                       BoxShadow(

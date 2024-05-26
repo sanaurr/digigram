@@ -35,7 +35,7 @@ extension LoadingWidget on Loading {
             child: LoadingAnimationWidget.inkDrop(
               // leftDotColor: const Color(0xFF1A1A3F),
               // rightDotColor: const Color(0xFFEA3799),
-              color: Color.fromARGB(255, 218, 12, 225),
+              color: const Color.fromARGB(255, 218, 12, 225),
               size: 150,
             ),
           ),

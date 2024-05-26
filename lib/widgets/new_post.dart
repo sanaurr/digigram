@@ -3,11 +3,9 @@ import 'dart:typed_data';
 
 import 'package:digigram/models/post_model.dart';
 import 'package:digigram/models/user_model.dart';
-import 'package:digigram/utils/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_provider/loading_provider.dart';
-import 'package:lottie/lottie.dart';
 import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 

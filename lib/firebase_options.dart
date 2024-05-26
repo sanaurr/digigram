@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -58,6 +55,14 @@ class DefaultFirebaseOptions {
     messagingSenderId: '541831301909',
     projectId: 'digigram-e5cbf',
     authDomain: 'digigram-e5cbf.firebaseapp.com',
+    storageBucket: 'digigram-e5cbf.appspot.com',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyCrO_uCLYTwh3qQaD6J4D2L9W1WpjQP-UQ',
+    appId: '1:541831301909:android:06afcb46d5df90094bb71c',
+    messagingSenderId: '541831301909',
+    projectId: 'digigram-e5cbf',
     storageBucket: 'digigram-e5cbf.appspot.com',
   );
 
