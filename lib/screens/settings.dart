@@ -1,5 +1,5 @@
 import 'package:digigram/models/theme_provider.dart';
-import 'package:digigram/models/user_model.dart';
+// import 'package:digigram/models/user_model.dart';
 import 'package:digigram/widgets/change_password.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    var usermodel = context.watch<UserModel>();
+    // var usermodel = context.watch<UserModel>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
