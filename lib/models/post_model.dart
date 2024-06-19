@@ -46,8 +46,8 @@ class PostLikeModel {
       };
 
   Future<void> loadUser() async {
-    var snap = await UserModelStaticService.collectionRef.doc(uid).get();
-    user = UserModel.fromMap(snap.data()!);
+    var snap = await UserModelStaticService.collectionModelRef.doc(uid).get();
+    user = snap.data()!;
   }
 }
 
@@ -70,8 +70,8 @@ class PostCommentModel {
       };
 
   Future<UserModel> getUser() async {
-    var snap = await UserModelStaticService.collectionRef.doc(uid).get();
-    var user = UserModel.fromMap(snap.data()!);
+    var snap = await UserModelStaticService.collectionModelRef.doc(uid).get();
+    var user = snap.data()!;
     return user;
   }
 
@@ -85,8 +85,8 @@ class PostCommentModel {
   }
 
   Future<void> loadUser() async {
-    var snap = await UserModelStaticService.collectionRef.doc(uid).get();
-    user = UserModel.fromMap(snap.data()!);
+    var snap = await UserModelStaticService.collectionModelRef.doc(uid).get();
+    user = snap.data()!;
   }
 }
 
@@ -112,8 +112,8 @@ class PostModel {
         'created': created.millisecondsSinceEpoch
       };
   Future<void> loadUser() async {
-    var snap = await UserModelStaticService.collectionRef.doc(uid).get();
-    user = UserModel.fromMap(snap.data()!);
+    var snap = await UserModelStaticService.collectionModelRef.doc(uid).get();
+    user = snap.data()!;
   }
 }
 
@@ -184,8 +184,8 @@ extension PostModelService on PostModel {
   }
 
   Future<void> loadUser() async {
-    var snap = await UserModelStaticService.collectionRef.doc(uid).get();
-    user = UserModel.fromMap(snap.data()!);
+    var snap = await UserModelStaticService.collectionModelRef.doc(uid).get();
+    user = snap.data()!;
   }
 
   Future<void> deletePost() async {

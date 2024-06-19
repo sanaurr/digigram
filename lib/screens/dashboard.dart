@@ -4,6 +4,7 @@ import 'package:digigram/utils/extentions.dart';
 import 'package:digigram/widgets/connections.dart';
 import 'package:digigram/widgets/feedpostsview.dart';
 import 'package:digigram/widgets/new_post.dart';
+import 'package:digigram/widgets/storybar.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:go_router/go_router.dart';
@@ -35,15 +36,15 @@ class _DashboardState extends State<Dashboard> {
           ? AppBar(
               title: const Text("DIGIGRAM"),
               backgroundColor: context.colorScheme.secondary,
-              foregroundColor: context.colorScheme.onSecondary,
+              // foregroundColor: context.colorScheme.onSecondary,
               actions: [
                 IconButton(
                   onPressed: () async {
-                    context.loadingController.on();
+                   var loading = context.loadingController..on();
                     await Future.delayed(
                       const Duration(seconds: 3),
                     );
-                    context.loadingController.off();
+                    loading.off();
                   },
                   icon: const Icon(Icons.notifications),
                 ),
@@ -92,7 +93,7 @@ class _DashboardState extends State<Dashboard> {
                 ? const Connections()
                 : selectedNav == 1
                     ? NewPost(onposted: onposted)
-                    : const FeedPosts(),
+                    : const Expanded(child: FeedPosts()),
           ),
         ],
       ),

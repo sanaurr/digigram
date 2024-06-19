@@ -42,7 +42,7 @@ class UserModel with ChangeNotifier {
 
 extension UserModelServicve on UserModel {
   Future<void> save() async {
-    return UserModelStaticService.currentUserRef.set(toMap());
+    return UserModelStaticService.currentUserRef.set(this);
   }
 
   Future<void> follow(String uid) {
@@ -56,19 +56,19 @@ extension UserModelServicve on UserModel {
   }
 
   Future<List<UserModel>> getFollowing() async {
-    var snapshot = await UserModelStaticService.collectionRef
+    var snapshot = await UserModelStaticService.collectionModelRef
         .where("uid", whereIn: following)
         .limit(10)
         .get();
-    return snapshot.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    return snapshot.docs.map((e) => e.data()).toList();
   }
 
   Future<List<UserModel>> getFollowers() async {
-    var snapshot = await UserModelStaticService.collectionRef
+    var snapshot = await UserModelStaticService.collectionModelRef
         .where("following", arrayContains: uid)
         .limit(10)
         .get();
-    return snapshot.docs.map((e) => UserModel.fromMap(e.data())).toList();
+    return snapshot.docs.map((e) => e.data()).toList();
   }
 
   Future<List<PostModel>> getFeedPosts() async {
@@ -111,29 +111,39 @@ extension UserModelServicve on UserModel {
   }
 
   Future<List<UserModel>> searchUsers(String name) async {
-    var query = UserModelStaticService.collectionRef
+    var query = UserModelStaticService.collectionModelRef
         .where("name", isGreaterThanOrEqualTo: name)
         .where("name", isLessThan: '${name}z')
         .limit(10);
     var snapshot = await query.get();
 
     var usermodel =
-        snapshot.docs.map((e) => UserModel.fromMap(e.data())).toList();
+        snapshot.docs.map((e) => e.data()).toList();
     usermodel.removeWhere((element) => element.uid == uid);
     return usermodel;
   }
 }
 
 extension UserModelStaticService on UserModel {
-  static CollectionReference<Map<String, dynamic>> get collectionRef =>
-      FirebaseFirestore.instance.collection('users');
-  static DocumentReference<Map<String, dynamic>> get currentUserRef =>
-      collectionRef.doc(FirebaseAuth.instance.currentUser!.uid);
-  static Stream<UserModel> userChanges() =>
+  static CollectionReference<UserModel> get collectionModelRef =>
+      FirebaseFirestore.instance.collection('users').withConverter<UserModel>(
+        fromFirestore: (map, _) => UserModel.fromMap(map.data()!),
+        toFirestore: (user, _) => user.toMap(),
+      );
+
+  static DocumentReference<UserModel> get currentUserRef =>
+      collectionModelRef.doc(FirebaseAuth.instance.currentUser!.uid);
+
+     static Future<UserModel> getUser(String uid) async {
+      var user = await collectionModelRef.doc(uid).get();
+      return user.data()!;
+     } 
+
+     static Stream<UserModel> userChanges() =>
       currentUserRef.snapshots().asyncMap((event) {
         try {
           if (event.exists) {
-            return UserModel.fromMap(event.data()!);
+            return event.data()!;
           }
         } catch (e) {
           log(e.toString(), name: 'UserModel.fromMap');

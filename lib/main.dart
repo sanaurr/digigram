@@ -7,6 +7,8 @@ import 'package:digigram/screens/profile.dart';
 import 'package:digigram/screens/settings.dart';
 import 'package:digigram/screens/update_profile.dart';
 import 'package:digigram/utils/loading.dart';
+import 'package:digigram/widgets/add_story.dart';
+import 'package:digigram/widgets/story.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class MainApp extends StatelessWidget {
       appBuilder: (context, builder) => MaterialApp.router(
         theme: ThemeData(
           useMaterial3: true,
-          colorSchemeSeed: Colors.blue,
+          colorSchemeSeed: const Color.fromARGB(255, 43, 76, 128),
           brightness: context.watch<ThemeProvider>().mode,
         ),
         debugShowCheckedModeBanner: false,
