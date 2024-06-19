@@ -93,7 +93,7 @@ class _DashboardState extends State<Dashboard> {
                 ? const Connections()
                 : selectedNav == 1
                     ? NewPost(onposted: onposted)
-                    : const Expanded(child: FeedPosts()),
+                    : const FeedPosts(),
           ),
         ],
       ),
