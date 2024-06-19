@@ -20,10 +20,9 @@ class _StorybarState extends State<Storybar> {
     return StreamBuilder(
         stream: StoryModelService.getStory(user),
         builder: (context, snapshot) {
+
           if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const SizedBox.shrink();
           }
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -66,7 +65,7 @@ class _StorybarState extends State<Storybar> {
                               ),
                             ),
                             Text(
-                              s.name!,
+                              s.user.name,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
