@@ -25,6 +25,7 @@ class _AddStoryState extends State<AddStory> {
           ElevatedButton(
             onPressed: () async {
               var loadcontroller = context.loadingController;
+              var navigator = Navigator.of(context);
               loadcontroller.on("onpoastloading");
               var messanger = ScaffoldMessenger.of(context);
               if (image == null) {
@@ -46,6 +47,7 @@ class _AddStoryState extends State<AddStory> {
                       content: Text("Story Added"),
                     ),
                   );
+                  navigator.pop();
                   // widget.onposted();
                 } catch (e) {
                   loadcontroller.off();
@@ -53,6 +55,7 @@ class _AddStoryState extends State<AddStory> {
                 }
               }
               loadcontroller.off();
+
             },
             child: const Text("Add"),
           ),

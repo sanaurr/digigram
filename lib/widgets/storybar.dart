@@ -1,4 +1,4 @@
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:digigram/models/story_model.dart';
 import 'package:digigram/models/user_model.dart';
@@ -21,9 +21,13 @@ class _StorybarState extends State<Storybar> {
     return StreamBuilder(
         stream: StoryModelService.getStory(currentUser),
         builder: (context, snapshot) {
-          log(snapshot.requireData.length.toString());
+          // log(snapshot.requireData.length.toString());
           if (!snapshot.hasData) {
-            return const SizedBox.shrink();
+            return const SizedBox.shrink(
+              // child: CircularProgressIndicator(),
+            
+            );
+            // return Text("No story");
           }
           return SingleChildScrollView(
             scrollDirection: Axis.horizontal,
