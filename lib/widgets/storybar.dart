@@ -60,7 +60,10 @@ class _StorybarState extends State<Storybar> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                context.go("/viewstory",extra: snapshot.requireData);
+                                context.go(
+                                  "/viewstory",
+                                  extra: snapshot.requireData.sublist(snapshot.requireData.indexOf(s),),
+                                );
                               },
                               icon: SizedBox.square(
                                 dimension: 80,
