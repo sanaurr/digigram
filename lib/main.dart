@@ -1,4 +1,5 @@
 import 'package:digigram/firebase_options.dart';
+import 'package:digigram/models/story_model.dart';
 import 'package:digigram/models/theme_provider.dart';
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/screens/dashboard.dart';
@@ -133,6 +134,28 @@ class MainApp extends StatelessWidget {
                       },
                     ),
                   ],
+                ),
+                GoRoute(
+                  path: 'addstory',
+                  redirect: (context, state) async {
+                    if (FirebaseAuth.instance.currentUser == null) {
+                      return "/";
+                    } else {
+                      return null;
+                    }
+                  },
+                  builder: (context, state) => const AddStory(),
+                ),
+                GoRoute(
+                  path: 'viewstory',
+                  redirect: (context, state) async {
+                    if (FirebaseAuth.instance.currentUser == null || state.extra == null) {
+                      return "/";
+                    } else {
+                      return null;
+                    }
+                  },
+                  builder: (context, state) => StoryPage(stories: state.extra as List<Story>,),
                 ),
               ],
             ),

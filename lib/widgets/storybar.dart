@@ -1,8 +1,9 @@
+import 'dart:developer';
+
 import 'package:digigram/models/story_model.dart';
 import 'package:digigram/models/user_model.dart';
-import 'package:digigram/widgets/add_story.dart';
-import 'package:digigram/widgets/story.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class Storybar extends StatefulWidget {
@@ -15,12 +16,12 @@ class Storybar extends StatefulWidget {
 class _StorybarState extends State<Storybar> {
   @override
   Widget build(BuildContext context) {
-    var user = context.read<UserModel>();
+    var currentUser = context.read<UserModel>();
 
     return StreamBuilder(
-        stream: StoryModelService.getStory(user),
+        stream: StoryModelService.getStory(currentUser),
         builder: (context, snapshot) {
-
+          log(snapshot.requireData.length.toString());
           if (!snapshot.hasData) {
             return const SizedBox.shrink();
           }
@@ -31,18 +32,18 @@ class _StorybarState extends State<Storybar> {
               children: [
                 InkWell(
                   onTap: () {
-                    context.addStory();
+                    context.go('/addstory');
                   },
                   child: Column(
                     children: [
                       SizedBox.square(
                         dimension: 80,
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(user.photoURL),
+                          backgroundImage: NetworkImage(currentUser.photoURL),
                         ),
                       ),
                       const Text(
-                        "Your Story",
+                        "Add Story",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -55,7 +56,7 @@ class _StorybarState extends State<Storybar> {
                           children: [
                             IconButton(
                               onPressed: () {
-                                context.viewStory(s);
+                                context.go("/viewstory",extra: snapshot.requireData);
                               },
                               icon: SizedBox.square(
                                 dimension: 80,
@@ -65,7 +66,7 @@ class _StorybarState extends State<Storybar> {
                               ),
                             ),
                             Text(
-                              s.user.name,
+                              currentUser.uid == s.user.uid ? "Your Story" : s.user.name,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
