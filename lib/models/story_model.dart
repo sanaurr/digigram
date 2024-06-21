@@ -82,4 +82,12 @@ extension StoryModelService on Story {
       log(e.toString());
     }
   }
+
+  static Future<void> deleteStory(String uid) async {
+    try {
+      await collectionRef.doc(uid).delete();
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }
