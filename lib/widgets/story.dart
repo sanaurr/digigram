@@ -1,10 +1,8 @@
 import 'dart:developer';
 
 import 'package:digigram/models/story_model.dart';
-import 'package:digigram/models/user_model.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class StoryPage extends StatefulWidget {
   const StoryPage({super.key, required this.stories});
@@ -26,10 +24,13 @@ class _StoryPageState extends State<StoryPage> {
           itemBuilder: (context, index) {
             var story = widget.stories[index];
             return Stack(
+              // alignment: AlignmentDirectional.center,
               children: [
-                Image.network(
-                  story.url,
-                  fit: BoxFit.fill,
+                Positioned.fill(
+                  child: Image.network(
+                    story.url,
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 Positioned(
                   top: 40,
@@ -54,7 +55,7 @@ class _StoryPageState extends State<StoryPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       Text(story.added.formattedTime),
@@ -62,9 +63,10 @@ class _StoryPageState extends State<StoryPage> {
                       IconButton(
                           onPressed: () async {
                             try {
+                              var navigator = Navigator.of(context);
                               log("inside try");
-
-                              await StoryModelService.deleteStory(story.uid);
+                              await story.deleteStory();
+                              navigator.pop();
                               log(story.uid);
                               // log(currentuser.uid);
                             } catch (e) {

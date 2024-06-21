@@ -19,6 +19,7 @@ class Story {
   late String url;
   DateTime added;
   late UserModel user;
+  late DocumentReference ref;
   Story(
     this.mediaType,
   )   : added = DateTime.now().toUtc(),
@@ -67,7 +68,7 @@ extension StoryModelService on Story {
     var snapshot = collectionRef.where("uid", whereIn: user.following..add(user.uid)).snapshots();
     return snapshot.asyncMap((querySnap) async {
       var users = querySnap.docs.map((e) async {
-        var story = Story.fromMap(e.data());
+        var story = Story.fromMap(e.data())..ref = e.reference;
         await story.fetchUser();
         return story;
       }).toList();
@@ -83,9 +84,9 @@ extension StoryModelService on Story {
     }
   }
 
-  static Future<void> deleteStory(String uid) async {
+  Future<void> deleteStory() async {
     try {
-      await collectionRef.doc(uid).delete();
+      await ref.delete();
     } catch (e) {
       log(e.toString());
     }
