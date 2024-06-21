@@ -64,15 +64,25 @@ class Story {
 
 extension StoryModelService on Story {
   static CollectionReference<Map<String, dynamic>> get collectionRef => FirebaseFirestore.instance.collection('story');
-  static Stream<List<Story>> getStory(UserModel user) {
+  static Stream<List<List<Story>>> getStory(UserModel user) {
     var snapshot = collectionRef.where("uid", whereIn: user.following..add(user.uid)).snapshots();
     return snapshot.asyncMap((querySnap) async {
-      var users = querySnap.docs.map((e) async {
+      var futureStories = querySnap.docs.map((e) async {
         var story = Story.fromMap(e.data())..ref = e.reference;
         await story.fetchUser();
         return story;
       }).toList();
-      return await Future.wait(users);
+      var stories = await Future.wait(futureStories);
+      Map<String, List<Story>> map = {};
+      for (var story in stories) {
+        if (!map.containsKey(story.uid)) {
+          map[story.uid] = [story];
+        } else {
+          map[story.uid]!.add(story);
+        }
+      }
+      return map.values.toList();
+
     });
   }
 
