@@ -149,13 +149,13 @@ class MainApp extends StatelessWidget {
                 GoRoute(
                   path: 'viewstory',
                   redirect: (context, state) async {
-                    if (FirebaseAuth.instance.currentUser == null || state.extra == null) {
+                    if (FirebaseAuth.instance.currentUser == null || state.extra == null || state.extra is! List<List<Story>>) {
                       return "/";
                     } else {
                       return null;
                     }
                   },
-                  builder: (context, state) => StoryPage(stories: state.extra as List<Story>,),
+                  builder: (context, state) => StoryPage(stories: state.extra as List<List<Story>>),
                 ),
               ],
             ),

@@ -68,12 +68,12 @@ class _StorybarState extends State<Storybar> {
                               icon: SizedBox.square(
                                 dimension: 80,
                                 child: CircleAvatar(
-                                  backgroundImage: NetworkImage(s.url),
+                                  backgroundImage: NetworkImage(s.first.url),
                                 ),
                               ),
                             ),
                             Text(
-                              currentUser.uid == s.user.uid ? "Your Story" : s.user.name,
+                              currentUser.uid == s.first.uid ? "Your Story" : s.first.user.name,
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
