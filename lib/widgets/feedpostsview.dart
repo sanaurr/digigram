@@ -1,4 +1,3 @@
-
 import 'package:digigram/models/post_model.dart';
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/widgets/post_view.dart';
@@ -30,9 +29,11 @@ class _FeedPostsState extends State<FeedPosts> {
     // });
     var usermodel = context.read<UserModel>();
     posts = await usermodel.getFeedPosts();
-    setState(() {
-      isloading = false;
-    });
+    if (mounted) {
+      setState(() {
+        isloading = false;
+      });
+    }
   }
 
   @override
