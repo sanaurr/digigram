@@ -1,8 +1,10 @@
 import 'dart:developer';
 
 import 'package:digigram/models/story_model.dart';
+import 'package:digigram/models/user_model.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ViewStory extends StatefulWidget {
   const ViewStory({
@@ -24,6 +26,7 @@ class _ViewStoryState extends State<ViewStory> {
   Offset tapdown = Offset.zero;
   @override
   Widget build(BuildContext context) {
+    var currentuser = context.watch<UserModel>();
     var image = Image.network(
       widget.stories[currentindex].url,
       fit: BoxFit.contain,
@@ -96,15 +99,31 @@ class _ViewStoryState extends State<ViewStory> {
                       widget.stories[currentindex].added.formattedTime,
                       style: const TextStyle(fontSize: 12),
                     ),
-                    trailing: IconButton(
-                      onPressed: () async {
+                    trailing: PopupMenuButton(
+                      itemBuilder: (context) {
+                        return [
+                          if (widget.stories[currentindex].uid ==
+                              currentuser.uid)
+                          const PopupMenuItem(
+                            value: 1,
+                            child: Text("Delete"),
+                          ),
+                          const PopupMenuItem(
+                            value: 2,
+                            child: Text("Hide"),
+                          ),
+                        ];
+                      },
+                      onSelected: (value) async {
                         try {
-                          var navigator = Navigator.of(context);
-                          log("inside try");
-                          await widget.stories[currentindex].deleteStory();
-                          navigator.pop();
-                          // log(story.uid);
-                          // log(currentuser.uid);
+                          if (value == 1) {
+                            var navigator = Navigator.of(context);
+                            log("inside try");
+                            await widget.stories[currentindex].deleteStory();
+                            navigator.pop();
+                            // log(story.uid);
+                            // log(currentuser.uid);
+                          }
                         } catch (e) {
                           log(e.toString());
                         }

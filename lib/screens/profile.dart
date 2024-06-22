@@ -25,6 +25,8 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         title: Text("${currentUsermodel.name}'s Profile"),
         centerTitle: true,
+        backgroundColor: context.colorScheme.secondary,
+        foregroundColor: context.colorScheme.onSecondary,
         actions: [
           IconButton(
             onPressed: () {
@@ -78,6 +80,7 @@ class _ProfileState extends State<Profile> {
               DefaultTabController(
                 length: 3,
                 child: TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
                   onTap: (value) {
                     setState(() {
                       selectedTab = value;
@@ -219,7 +222,8 @@ class _ProfileState extends State<Profile> {
                                             .read<UserModel>()
                                             .following
                                             .contains(user.uid)
-                                        ? context.colorScheme.primary
+                                        ? 
+                                        context.colorScheme.primary
                                         : null,
                                   ),
                                 ),

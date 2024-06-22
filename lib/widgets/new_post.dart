@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:digigram/models/post_model.dart';
 import 'package:digigram/models/user_model.dart';
+import 'package:digigram/utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_provider/loading_provider.dart';
@@ -27,6 +28,8 @@ class _NewPostState extends State<NewPost> {
       appBar: AppBar(
         title: const Text("Create post"),
         centerTitle: true,
+        backgroundColor: context.colorScheme.secondary,
+        foregroundColor: context.colorScheme.onSecondary,
         actions: [
           ElevatedButton(
             onPressed: () async {

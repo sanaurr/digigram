@@ -34,7 +34,7 @@ class _PostViewState extends State<PostView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            color: context.colorScheme.primaryContainer.withOpacity(0.1),
+            color: context.colorScheme.primaryContainer.withOpacity(0.2),
             child: Row(
               children: [
                 SizedBox.square(
@@ -176,7 +176,7 @@ class _PostViewState extends State<PostView> {
           Divider(
             thickness: 0.5,
             height: 0.5,
-            color: context.colorScheme.primary.withOpacity(0.3),
+            // color: context.colorScheme.primary.withOpacity(0.3),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -243,7 +243,7 @@ class _PostViewState extends State<PostView> {
           Divider(
             thickness: 0.5,
             height: 0.5,
-            color: context.colorScheme.primary.withOpacity(0.3),
+            // color: context.colorScheme.primary.withOpacity(0.3),
           ),
         ],
       ),
@@ -432,7 +432,7 @@ class _PostViewState extends State<PostView> {
                     ),
                   );
                 }
-              }),
+              },),
         ),
       ),
     );

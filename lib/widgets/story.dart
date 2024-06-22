@@ -1,9 +1,11 @@
 import 'dart:developer';
 
 import 'package:digigram/models/story_model.dart';
+import 'package:digigram/models/user_model.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:digigram/widgets/story_view.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class StoryPage extends StatefulWidget {
   const StoryPage({super.key, required this.stories});
@@ -18,7 +20,7 @@ class _StoryPageState extends State<StoryPage> {
   final controller = PageController();
   @override
   Widget build(BuildContext context) {
-    // var currentuser = context.watch<UserModel>();
+    var currentuser = context.watch<UserModel>();
     return Scaffold(
       // backgroundColor: Colors.black,
       body: PageView.builder(

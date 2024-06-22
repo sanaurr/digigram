@@ -1,4 +1,3 @@
-
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:digigram/widgets/connections.dart';
@@ -10,7 +9,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:loading_provider/loading_provider.dart';
 import 'package:provider/provider.dart';
-
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -36,11 +34,11 @@ class _DashboardState extends State<Dashboard> {
           ? AppBar(
               title: const Text("DIGIGRAM"),
               backgroundColor: context.colorScheme.secondary,
-              // foregroundColor: context.colorScheme.onSecondary,
+              foregroundColor: context.colorScheme.onSecondary,
               actions: [
                 IconButton(
                   onPressed: () async {
-                   var loading = context.loadingController..on();
+                    var loading = context.loadingController..on();
                     await Future.delayed(
                       const Duration(seconds: 3),
                     );
@@ -55,8 +53,7 @@ class _DashboardState extends State<Dashboard> {
                   icon: SizedBox.square(
                     dimension: 30,
                     child: CircleAvatar(
-                      backgroundImage:
-                          NetworkImage(usermodel.photoURL),
+                      backgroundImage: NetworkImage(usermodel.photoURL),
                     ),
                   ),
                 ),
@@ -102,15 +99,24 @@ class _DashboardState extends State<Dashboard> {
           : CurvedNavigationBar(
               height: 50,
               items: [
-                Icon(Icons.home,
-                    size: 30, color: context.colorScheme.onSecondary),
-                Icon(Icons.add,
-                    size: 30, color: context.colorScheme.onSecondary),
-                Icon(Icons.person_add,
-                    size: 30, color: context.colorScheme.onSecondary),
+                Icon(
+                  Icons.home,
+                  size: 30,
+                  color: context.colorScheme.onSecondary,
+                ),
+                Icon(
+                  Icons.add,
+                  size: 30,
+                  color: context.colorScheme.onSecondary,
+                ),
+                Icon(
+                  Icons.person_add,
+                  size: 30,
+                  color: context.colorScheme.onSecondary,
+                ),
               ],
               color: context.colorScheme.secondary,
-              buttonBackgroundColor: context.colorScheme.secondary,
+              // buttonBackgroundColor: context.colorScheme.secondary,
               backgroundColor: Colors.transparent,
               animationCurve: Curves.easeInOut,
               animationDuration: const Duration(milliseconds: 400),

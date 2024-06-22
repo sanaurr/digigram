@@ -47,7 +47,7 @@ class MainApp extends StatelessWidget {
       appBuilder: (context, builder) => MaterialApp.router(
         theme: ThemeData(
           useMaterial3: true,
-          colorSchemeSeed: const Color.fromARGB(255, 43, 76, 128),
+          colorSchemeSeed: Colors.blue,
           brightness: context.watch<ThemeProvider>().mode,
         ),
         debugShowCheckedModeBanner: false,
@@ -149,13 +149,31 @@ class MainApp extends StatelessWidget {
                 GoRoute(
                   path: 'viewstory',
                   redirect: (context, state) async {
-                    if (FirebaseAuth.instance.currentUser == null || state.extra == null || state.extra is! List<List<Story>>) {
+                    if (FirebaseAuth.instance.currentUser == null ||
+                        state.extra == null ||
+                        state.extra is! List<List<Story>>) {
                       return "/";
                     } else {
                       return null;
                     }
                   },
-                  builder: (context, state) => StoryPage(stories: state.extra as List<List<Story>>),
+                  builder: (context, state) {
+                    return StreamBuilder(
+                          stream: UserModelStaticService.userChanges(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ChangeNotifierProvider.value(
+                                value: snapshot.requireData,
+                                child: StoryPage(stories: state.extra as List<List<Story>>),
+                              );
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        );
+                  },
                 ),
               ],
             ),
