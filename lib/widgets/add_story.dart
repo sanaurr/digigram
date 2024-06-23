@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:digigram/models/story_model.dart';
+import 'package:digigram/utils/extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_provider/loading_provider.dart';
@@ -21,6 +22,8 @@ class _AddStoryState extends State<AddStory> {
       appBar: AppBar(
         title: const Text("Add your story"),
         centerTitle: true,
+        backgroundColor: context.colorScheme.secondary,
+        foregroundColor: context.colorScheme.onSecondary,
         actions: [
           ElevatedButton(
             onPressed: () async {
@@ -34,11 +37,10 @@ class _AddStoryState extends State<AddStory> {
               } else {
                 var newStory = Story(
                   MediaType.image,
-
                 );
-                
-                  await newStory.uploadStoryImage(image!);
-                
+
+                await newStory.uploadStoryImage(image!);
+
                 try {
                   await newStory.saveStory();
                   loadcontroller.off();
@@ -55,7 +57,6 @@ class _AddStoryState extends State<AddStory> {
                 }
               }
               loadcontroller.off();
-
             },
             child: const Text("Add"),
           ),
@@ -84,8 +85,9 @@ class _AddStoryState extends State<AddStory> {
                       ],
                     ),
                   ),
-                  onTap: () async{
-                   var file = await ImagePicker().pickImage(source: ImageSource.camera);
+                  onTap: () async {
+                    var file = await ImagePicker()
+                        .pickImage(source: ImageSource.camera);
                     if (file != null) {
                       var newimage = await file.readAsBytes();
                       var mimeType =
@@ -114,8 +116,9 @@ class _AddStoryState extends State<AddStory> {
                       ],
                     ),
                   ),
-                  onTap: () async{
-                   var file = await ImagePicker().pickImage(source: ImageSource.gallery);
+                  onTap: () async {
+                    var file = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
                     if (file != null) {
                       var newimage = await file.readAsBytes();
                       var mimeType =
@@ -190,7 +193,7 @@ class _AddStoryState extends State<AddStory> {
 extension StoryAdd on BuildContext {
   void addStory() {
     Navigator.of(this).push(MaterialPageRoute(builder: (context) {
-          return const AddStory();
+      return const AddStory();
     }));
   }
 }
