@@ -2,8 +2,10 @@ import 'dart:developer';
 
 import 'package:digigram/models/story_model.dart';
 import 'package:digigram/models/user_model.dart';
+import 'package:digigram/screens/profile.dart';
 import 'package:digigram/utils/extentions.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ViewStory extends StatefulWidget {
@@ -82,7 +84,22 @@ class _ViewStoryState extends State<ViewStory> {
                   right: 0,
                   child: ListTile(
                     leading: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        var user = context.read<UserModel>();
+                      if (user.uid == widget.stories[currentindex].uid) {
+                        context.go('/profile');
+                      } else {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ChangeNotifierProvider.value(
+                              value: user,
+                              child: Profile(user: widget.stories[currentindex].user),
+                            ),
+                          ),
+                        );
+                      }
+                      },
                       icon: SizedBox.square(
                         dimension: 50,
                         child: CircleAvatar(
