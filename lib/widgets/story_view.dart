@@ -4,6 +4,7 @@ import 'package:digigram/models/story_model.dart';
 import 'package:digigram/models/user_model.dart';
 import 'package:digigram/screens/profile.dart';
 import 'package:digigram/utils/extentions.dart';
+import 'package:digigram/widgets/story_progressbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +80,22 @@ class _ViewStoryState extends State<ViewStory> {
                   ),
                 ),
                 Positioned(
-                  top: 20,
+                  top: 30,
+                  left: 0,
+                  right: 0,
+                  child: StoryProgress(
+                    totalStoryCount: widget.stories.length,
+                    duration: const Duration(seconds: 5),
+                    // currentStoryIndex: currentindex,
+                    onIndexChanged: (index) {
+                      setState(() {
+                        currentindex = index;
+                      });
+                    },
+                  ),
+                ),
+                Positioned(
+                  top: 30,
                   left: 0,
                   right: 0,
                   child: ListTile(

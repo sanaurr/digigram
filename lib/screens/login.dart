@@ -36,47 +36,43 @@ class _LoginState extends State<Login> {
                 const SizedBox(
                   height: 50,
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextField(
-                    controller: mailController,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(
-                            isloginpage == true ? Icons.person : Icons.mail),
-                        hintText:
-                            isloginpage == true ? 'Username' : 'Enter E-mail'),
-                  ),
+                TextField(
+                  controller: mailController,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50),
+                        borderSide: BorderSide.none,
+                      ),
+                      fillColor: Theme.of(context).colorScheme.primaryContainer,
+                      filled: true,
+                      prefixIcon:
+                          Icon(isloginpage == true ? Icons.person : Icons.mail),
+                      hintText:
+                          isloginpage == true ? 'Username' : 'Enter E-mail'),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  // height: 40,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: TextField(
-                    obscureText: showPassword,
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: const Icon(Icons.lock),
-                      hintText: 'Password',
-                      suffix: InkWell(
-                        onTap: () {
-                          showPassword = !showPassword;
-                          setState(() {});
-                        },
-                        child: Icon(showPassword
-                            ? Icons.visibility_off_sharp
-                            : Icons.visibility_sharp),
-                      ),
+                TextField(
+                  obscureText: showPassword,
+                  controller: passwordController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: const Icon(Icons.lock),
+                    hintText: 'Password',
+                    fillColor: Theme.of(context).colorScheme.primaryContainer,
+                    filled: true,
+                    suffix: InkWell(
+                      onTap: () {
+                        showPassword = !showPassword;
+                        setState(() {});
+                      },
+                      child: Icon(showPassword
+                          ? Icons.visibility_off_sharp
+                          : Icons.visibility_sharp,size: 20,),
                     ),
                   ),
                 ),
@@ -126,7 +122,8 @@ class _LoginState extends State<Login> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+                    backgroundColor:
+                        Theme.of(context).colorScheme.primaryContainer,
                   ),
                   child: Text(
                     isloginpage == true ? 'Login' : 'Signup',
