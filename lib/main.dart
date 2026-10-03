@@ -8,6 +8,7 @@ import 'package:digigram/screens/profile.dart';
 import 'package:digigram/screens/settings.dart';
 import 'package:digigram/screens/update_profile.dart';
 import 'package:digigram/utils/loading.dart';
+import 'package:digigram/widgets/aboutUs.dart';
 import 'package:digigram/widgets/add_story.dart';
 import 'package:digigram/widgets/story.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -132,6 +133,19 @@ class MainApp extends StatelessWidget {
                           },
                         );
                       },
+                      routes: [
+                        GoRoute(
+                          path: 'aboutus',
+                          redirect: (context, state) async {
+                            if (FirebaseAuth.instance.currentUser == null) {
+                              return "/";
+                            } else {
+                              return null;
+                            }
+                          },
+                          builder: (context, state) => const Aboutus(),
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -159,20 +173,21 @@ class MainApp extends StatelessWidget {
                   },
                   builder: (context, state) {
                     return StreamBuilder(
-                          stream: UserModelStaticService.userChanges(),
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              return ChangeNotifierProvider.value(
-                                value: snapshot.requireData,
-                                child: StoryPage(stories: state.extra as List<List<Story>>),
-                              );
-                            } else {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                          },
-                        );
+                      stream: UserModelStaticService.userChanges(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return ChangeNotifierProvider.value(
+                            value: snapshot.requireData,
+                            child: StoryPage(
+                                stories: state.extra as List<List<Story>>),
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    );
                   },
                 ),
               ],
