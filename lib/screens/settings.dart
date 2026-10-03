@@ -60,9 +60,7 @@ class _SettingsState extends State<Settings> {
                     });
                   },
                 ),
-                const SizedBox(
-                  height: 30,
-                ),
+               
                 ListTile(
                   title: const Text('Dark Mode'),
                   trailing: Switch(
@@ -75,6 +73,12 @@ class _SettingsState extends State<Settings> {
                       }
                     },
                   ),
+                ),
+                ListTile(
+                  title: const Text("About us"),
+                  onTap: () {
+                    context.go('/profile/settings/aboutus');
+                  },
                 ),
                 const SizedBox(
                   height: 30,
